@@ -32,7 +32,8 @@ class RouteName {
   static const String coinRankingList = 'coinRankingList';
 }
 
-class Router {
+// rename: fix for import conflict
+class RouterManger {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case RouteName.splash:
