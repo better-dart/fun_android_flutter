@@ -18,8 +18,13 @@ import 'package:fun_android/ui/page/user/register_page.dart';
 import 'package:fun_android/ui/widget/page_route_anim.dart';
 import 'package:fun_android/view_model/setting_model.dart';
 
+//
+// todo: 路由列表
+//
 class RouteName {
   static const String splash = 'splash';
+
+  // todo: 由 splash -> / 跳转
   static const String tab = '/';
   static const String homeSecondFloor = 'homeSecondFloor';
   static const String login = 'login';
@@ -34,25 +39,27 @@ class RouteName {
 
 // rename: fix for import conflict
 class RouterManger {
+  // todo: 路由 map
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case RouteName.splash:
         return NoAnimRouteBuilder(SplashPage());
       case RouteName.tab:
+        //
+        // todo: 根页面(index root)
+        //
         return NoAnimRouteBuilder(TabNavigator());
       case RouteName.homeSecondFloor:
         return SlideTopRouteBuilder(MyBlogPage());
       case RouteName.login:
-        return CupertinoPageRoute(
-            fullscreenDialog: true, builder: (_) => LoginPage());
+        return CupertinoPageRoute(fullscreenDialog: true, builder: (_) => LoginPage());
       case RouteName.register:
         return CupertinoPageRoute(builder: (_) => RegisterPage());
       case RouteName.articleDetail:
         var article = settings.arguments as Article;
         return CupertinoPageRoute(builder: (_) {
           // 根据配置调用页面
-          return StorageManager.sharedPreferences.getBool(kUseWebViewPlugin) ??
-                  false
+          return StorageManager.sharedPreferences.getBool(kUseWebViewPlugin) ?? false
               ? ArticleDetailPluginPage(
                   article: article,
                 )
@@ -64,8 +71,7 @@ class RouterManger {
         var list = settings.arguments as List;
         Tree tree = list[0] as Tree;
         int index = list[1];
-        return CupertinoPageRoute(
-            builder: (_) => ArticleCategoryTabPage(tree, index));
+        return CupertinoPageRoute(builder: (_) => ArticleCategoryTabPage(tree, index));
       case RouteName.favouriteList:
         return CupertinoPageRoute(builder: (_) => FavouriteListPage());
       case RouteName.setting:
@@ -102,8 +108,7 @@ class PopRoute extends PopupRoute {
   String get barrierLabel => null;
 
   @override
-  Widget buildPage(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation) {
+  Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
     return child;
   }
 

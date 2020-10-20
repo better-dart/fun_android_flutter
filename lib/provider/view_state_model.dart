@@ -32,6 +32,10 @@ class ViewStateModel with ChangeNotifier {
   set viewState(ViewState viewState) {
     _viewStateError = null;
     _viewState = viewState;
+
+    //
+    // todo:
+    //
     notifyListeners();
   }
 
@@ -130,6 +134,10 @@ class ViewStateModel with ChangeNotifier {
     return 'BaseModel{_viewState: $viewState, _viewStateError: $_viewStateError}';
   }
 
+
+  //
+  // todo:
+  //
   @override
   void notifyListeners() {
     if (!_disposed) {

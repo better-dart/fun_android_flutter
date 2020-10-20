@@ -8,6 +8,9 @@ import 'package:fun_android/config/router_manger.dart';
 import 'package:fun_android/config/resource_mananger.dart';
 import 'package:fun_android/generated/l10n.dart';
 
+//
+// todo: 初始根页面
+//
 class SplashPage extends StatefulWidget {
   @override
   _SplashPageState createState() => _SplashPageState();
@@ -20,11 +23,9 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    _logoController = AnimationController(
-        vsync: this, duration: Duration(milliseconds: 1500));
+    _logoController = AnimationController(vsync: this, duration: Duration(milliseconds: 1500));
 
-    _animation = Tween(begin: 0.0, end: 1.0).animate(
-        CurvedAnimation(curve: Curves.easeInOutBack, parent: _logoController));
+    _animation = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(curve: Curves.easeInOutBack, parent: _logoController));
 
     _animation.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
@@ -35,8 +36,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     });
     _logoController.forward();
 
-    _countdownController =
-        AnimationController(vsync: this, duration: Duration(seconds: 4));
+    _countdownController = AnimationController(vsync: this, duration: Duration(seconds: 4));
     _countdownController.forward();
     super.initState();
   }
@@ -54,11 +54,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
       body: WillPopScope(
         onWillPop: () => Future.value(false),
         child: Stack(fit: StackFit.expand, children: <Widget>[
-          Image.asset(
-              ImageHelper.wrapAssets(
-                  Theme.of(context).brightness == Brightness.light
-                      ? 'splash_bg.png'
-                      : 'splash_bg_dark.png'),
+          Image.asset(ImageHelper.wrapAssets(Theme.of(context).brightness == Brightness.light ? 'splash_bg.png' : 'splash_bg_dark.png'),
 //              colorBlendMode: BlendMode.srcOver,//colorBlendMode方式在android等机器上有些延迟,导致有些闪屏,故采用两套图片的方式
 //              color: Colors.black.withOpacity(
 //                  Theme.of(context).brightness == Brightness.light ? 0 : 0.65),
@@ -81,6 +77,12 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
             alignment: Alignment.bottomRight,
             child: SafeArea(
               child: InkWell(
+
+                ///////////////////////////////////////////////////////////
+
+                //
+                // todo: 页面跳转
+                //
                 onTap: () {
                   nextPage(context);
                 },
@@ -93,8 +95,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
                   ),
                   child: AnimatedCountdown(
                     context: context,
-                    animation: StepTween(begin: 3, end: 0)
-                        .animate(_countdownController),
+                    animation: StepTween(begin: 3, end: 0).animate(_countdownController),
                   ),
                 ),
               ),
@@ -109,10 +110,12 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 class AnimatedCountdown extends AnimatedWidget {
   final Animation<int> animation;
 
-  AnimatedCountdown({key, this.animation, context})
-      : super(key: key, listenable: animation) {
+  AnimatedCountdown({key, this.animation, context}) : super(key: key, listenable: animation) {
     this.animation.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
+        //
+        // todo: 页面跳转
+        //
         nextPage(context);
       }
     });
@@ -177,17 +180,15 @@ class AnimatedAndroidLogo extends AnimatedWidget {
   }
 }
 
+//
+// todo:
+//
 void nextPage(context) {
   Navigator.of(context).pushReplacementNamed(RouteName.tab);
 }
 
 class GuidePage extends StatefulWidget {
-  static const List<String> images = <String>[
-    'guide_page_1.png',
-    'guide_page_2.png',
-    'guide_page_3.png',
-    'guide_page_4.png'
-  ];
+  static const List<String> images = <String>['guide_page_1.png', 'guide_page_2.png', 'guide_page_3.png', 'guide_page_4.png'];
 
   @override
   _GuidePageState createState() => _GuidePageState();
@@ -204,6 +205,10 @@ class _GuidePageState extends State<GuidePage> {
       child: Stack(
         alignment: Alignment(0, 0.87),
         children: <Widget>[
+
+          //
+          // todo: 轮播
+          //
           Swiper(
               itemBuilder: (ctx, index) => Image.asset(
                     'assets/images/${GuidePage.images[index]}',
@@ -221,6 +226,10 @@ class _GuidePageState extends State<GuidePage> {
             child: CupertinoButton(
               color: Theme.of(context).primaryColorDark,
               child: Text('点我开始'),
+
+              //
+              // todo: 页面跳转
+              //
               onPressed: () {
                 nextPage(context);
               },

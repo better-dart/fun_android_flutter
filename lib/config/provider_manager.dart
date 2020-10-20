@@ -5,6 +5,10 @@ import 'package:fun_android/view_model/theme_model.dart';
 import 'package:fun_android/view_model/user_model.dart';
 import 'package:provider/single_child_widget.dart';
 
+
+//
+// todo: global providers 定义:
+//
 List<SingleChildWidget> providers = [
   ...independentServices,
   ...dependentServices,

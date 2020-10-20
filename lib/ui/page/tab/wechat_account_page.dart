@@ -19,6 +19,10 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'project_page.dart';
 
+
+//
+// todo: 公众号页面
+//
 class WechatAccountPage extends StatefulWidget {
   @override
   _WechatAccountPageState createState() => _WechatAccountPageState();
@@ -43,6 +47,10 @@ class _WechatAccountPageState extends State<WechatAccountPage>
     super.build(context);
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: StatusBarUtils.systemUiOverlayStyle(context),
+
+      //
+      //
+      //
       child: ProviderWidget<WechatAccountCategoryModel>(
           model: WechatAccountCategoryModel(),
           onModelReady: (model) {

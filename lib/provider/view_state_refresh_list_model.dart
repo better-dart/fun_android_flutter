@@ -75,6 +75,10 @@ abstract class ViewStateRefreshListModel<T> extends ViewStateListModel<T> {
         } else {
           refreshController.loadComplete();
         }
+
+        //
+        // todo:
+        //
         notifyListeners();
       }
       return data;
