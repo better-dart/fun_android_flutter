@@ -15,20 +15,30 @@ class TapToTopModel with ChangeNotifier {
     _height = height;
   }
 
+  //
+  //
+  //
   init() {
     _scrollController.addListener(() {
       if (_scrollController.offset > _height && !_showTopBtn) {
         _showTopBtn = true;
+
+        //
+        // todo: here!
+        //
         notifyListeners();
       } else if (_scrollController.offset < _height && _showTopBtn) {
         _showTopBtn = false;
+
+        //
+        // todo: here!
+        //
         notifyListeners();
       }
     });
   }
 
   scrollToTop() {
-    _scrollController.animateTo(0,
-        duration: Duration(milliseconds: 300), curve: Curves.easeOutCubic);
+    _scrollController.animateTo(0, duration: Duration(milliseconds: 300), curve: Curves.easeOutCubic);
   }
 }

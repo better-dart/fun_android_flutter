@@ -5,6 +5,10 @@ import 'package:fun_android/config/net/pgyer_api.dart';
 class AppRepository {
   static Future<AppUpdateInfo> checkUpdate(String platform, String version) async {
     debugPrint('检查更新,当前版本为===>$version');
+
+    //
+    // todo: http post
+    //
     var response = await http.post('app/check', queryParameters: {
       'buildVersion': version
     });

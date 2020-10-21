@@ -30,12 +30,20 @@ abstract class ViewStateRefreshListModel<T> extends ViewStateListModel<T> {
   Future<List<T>> refresh({bool init = false}) async {
     try {
       _currentPageNum = pageNumFirst;
+
+      //
+      //
+      //
       var data = await loadData(pageNum: pageNumFirst);
       if (data.isEmpty) {
         refreshController.refreshCompleted(resetFooterState: true);
         list.clear();
+
+        //
         setEmpty();
       } else {
+
+        //
         onCompleted(data);
         list.clear();
         list.addAll(data);

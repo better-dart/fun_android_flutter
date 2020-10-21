@@ -15,6 +15,10 @@ import 'package:fun_android/view_model/project_model.dart';
 
 import '../article/article_list_page.dart';
 
+
+//
+//
+//
 class ProjectPage extends StatefulWidget {
   @override
   _ProjectPageState createState() => _ProjectPageState();
@@ -48,8 +52,14 @@ class _ProjectPageState extends State<ProjectPage>
       child: ProviderWidget<ProjectCategoryModel>(
           model: ProjectCategoryModel(),
           onModelReady: (model) {
+            //
+            //
             model.initData();
           },
+
+          //
+          //
+          //
           builder: (context, model, child) {
             if (model.isBusy) {
               return ViewStateBusyWidget();
@@ -60,11 +70,19 @@ class _ProjectPageState extends State<ProjectPage>
 
             List<Tree> treeList = model.list;
             var primaryColor = Theme.of(context).primaryColor;
+
+            //
+            //
+            //
             return ValueListenableProvider<int>.value(
               value: valueNotifier,
               child: DefaultTabController(
                 length: model.list.length,
                 initialIndex: valueNotifier.value,
+
+                //
+                //
+                //
                 child: Builder(
                   builder: (context) {
                     if (tabController == null) {
@@ -82,6 +100,10 @@ class _ProjectPageState extends State<ProjectPage>
                             Container(
                               margin: const EdgeInsets.only(right: 25),
                               color: primaryColor.withOpacity(1),
+
+                              //
+                              //
+                              //
                               child: TabBar(
                                   isScrollable: true,
                                   tabs: List.generate(
@@ -93,6 +115,16 @@ class _ProjectPageState extends State<ProjectPage>
                           ],
                         ),
                       ),
+
+
+
+                      //////////////////////////////////////////////////////////////////////
+
+
+                      //
+                      //
+                      //
+                      //
                       body: TabBarView(
                         children: List.generate(treeList.length,
                             (index) => ArticleListPage(treeList[index].id)),

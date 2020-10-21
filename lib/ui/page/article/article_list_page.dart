@@ -30,9 +30,26 @@ class _ArticleListPageState extends State<ArticleListPage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+
+    //
+    //
+    //
     return ProviderWidget<StructureListModel>(
+
+      //
+      //
+      //
       model: StructureListModel(widget.cid),
+
+      //
+      //
+      //
       onModelReady: (model) => model.initData(),
+
+
+      //
+      //
+      //
       builder: (context, model, child) {
         if (model.isBusy) {
           return SkeletonList(
@@ -44,6 +61,11 @@ class _ArticleListPageState extends State<ArticleListPage>
         } else if (model.isEmpty) {
           return ViewStateEmptyWidget(onPressed: model.initData);
         }
+
+
+        //
+        //
+        //
         return SmartRefresher(
             controller: model.refreshController,
             header: WaterDropHeader(),
@@ -51,6 +73,10 @@ class _ArticleListPageState extends State<ArticleListPage>
             onRefresh: model.refresh,
             onLoading: model.loadMore,
             enablePullUp: true,
+
+            //
+            //
+            //
             child: ListView.builder(
                 itemCount: model.list.length,
                 itemBuilder: (context, index) {

@@ -22,16 +22,19 @@ class AppUpdateButton extends StatelessWidget {
       model: AppUpdateModel(),
       builder: (_, model, __) => CupertinoButton(
         color: Theme.of(context).accentColor,
-        child: model.isBusy
-            ? ButtonProgressIndicator()
-            : Text(S.of(context).appUpdateCheckUpdate),
+        child: model.isBusy ? ButtonProgressIndicator() : Text(S.of(context).appUpdateCheckUpdate),
         onPressed: model.isBusy
             ? null
             : () async {
+                //
+                //
+                //
                 AppUpdateInfo appUpdateInfo = await model.checkUpdate();
+
                 if (appUpdateInfo?.buildHaveNewVersion ?? false) {
-                  bool result =
-                      await showUpdateAlertDialog(context, appUpdateInfo);
+                  bool result = await showUpdateAlertDialog(context, appUpdateInfo);
+
+                  // todo: 下载更新包
                   if (result == true) downloadApp(context, appUpdateInfo);
                 } else {
                   showToast(S.of(context).appUpdateLeastVersion);
@@ -42,6 +45,9 @@ class AppUpdateButton extends StatelessWidget {
   }
 }
 
+//
+// todo: 检查版本更新
+//
 Future checkAppUpdate(BuildContext context) async {
   if (!Platform.isAndroid) return;
   AppUpdateInfo appUpdateInfo = await AppUpdateModel().checkUpdate();
@@ -61,12 +67,8 @@ showUpdateAlertDialog(context, AppUpdateInfo appUpdateInfo) async {
               return !forceUpdate;
             },
             child: AlertDialog(
-              title: Text(S
-                  .of(context)
-                  .appUpdateFoundNewVersion(appUpdateInfo.buildVersion)),
-              content: isNotBlank(appUpdateInfo.buildUpdateDescription)
-                  ? Text(appUpdateInfo.buildUpdateDescription)
-                  : null,
+              title: Text(S.of(context).appUpdateFoundNewVersion(appUpdateInfo.buildVersion)),
+              content: isNotBlank(appUpdateInfo.buildUpdateDescription) ? Text(appUpdateInfo.buildUpdateDescription) : null,
               actions: <Widget>[
                 if (!forceUpdate)
                   FlatButton(
@@ -89,14 +91,21 @@ showUpdateAlertDialog(context, AppUpdateInfo appUpdateInfo) async {
           ));
 }
 
+//
+// todo: 下载更新包
+//
 Future downloadApp(BuildContext context, AppUpdateInfo appUpdateInfo) async {
   var url = appUpdateInfo.downloadURL;
   var extDir = await getExternalStorageDirectory();
   debugPrint('extDir path: ${extDir.path}');
-  String apkPath =
-      '${extDir.path}/FunAndroid_${appUpdateInfo.buildVersion}_${appUpdateInfo.buildVersionNo}_${appUpdateInfo.buildBuildVersion}.apk';
+
+  //
+  //
+  //
+  String apkPath = '${extDir.path}/FunAndroid_${appUpdateInfo.buildVersion}_${appUpdateInfo.buildVersionNo}_${appUpdateInfo.buildBuildVersion}.apk';
   File file = File(apkPath);
   debugPrint('apkPath path: ${file.path}');
+
   if (!file.existsSync()) {
     // 没有下载过
     if (await showDownloadDialog(context, url, apkPath) ?? false) {
@@ -128,18 +137,14 @@ showDownloadDialog(context, url, path) async {
       builder: (context) {
         return WillPopScope(
           onWillPop: () async {
-            if (lastBackPressed == null ||
-                DateTime.now().difference(lastBackPressed) >
-                    Duration(seconds: 1)) {
+            if (lastBackPressed == null || DateTime.now().difference(lastBackPressed) > Duration(seconds: 1)) {
               //两次点击间隔超过1秒则重新计时
               lastBackPressed = DateTime.now();
-              showToast(S.of(context).appUpdateDoubleBackTips,
-                  position: ToastPosition.bottom);
+              showToast(S.of(context).appUpdateDoubleBackTips, position: ToastPosition.bottom);
               return false;
             }
             cancelToken.cancel();
-            showToast(S.of(context).appUpdateDownloadCanceled,
-                position: ToastPosition.bottom);
+            showToast(S.of(context).appUpdateDownloadCanceled, position: ToastPosition.bottom);
             return true;
           },
           child: CupertinoAlertDialog(
@@ -150,8 +155,7 @@ showDownloadDialog(context, url, path) async {
                 ValueNotifier notifier = ValueNotifier(0.0);
                 if (!downloading) {
                   downloading = true;
-                  Dio().download(url, path, cancelToken: cancelToken,
-                      onReceiveProgress: (progress, total) {
+                  Dio().download(url, path, cancelToken: cancelToken, onReceiveProgress: (progress, total) {
                     debugPrint('value--${progress / total}');
                     notifier.value = progress / total;
                   }).then((Response response) {

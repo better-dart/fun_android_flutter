@@ -26,26 +26,25 @@ class ArticleItemWidget extends StatelessWidget {
   /// 隐藏收藏按钮
   final bool hideFavourite;
 
-  ArticleItemWidget(this.article,
-      {this.index, this.onTap, this.top: false, this.hideFavourite: false})
-      : super(key: ValueKey(article.id));
+  ArticleItemWidget(this.article, {this.index, this.onTap, this.top: false, this.hideFavourite: false}) : super(key: ValueKey(article.id));
 
   @override
   Widget build(BuildContext context) {
     var backgroundColor = Theme.of(context).scaffoldBackgroundColor;
+
     /// 用于Hero动画的标记
     UniqueKey uniqueKey = UniqueKey();
     return Stack(
       children: <Widget>[
         Material(
-          color: top
-              ? Theme.of(context).accentColor.withAlpha(10)
-              : backgroundColor,
+          color: top ? Theme.of(context).accentColor.withAlpha(10) : backgroundColor,
           child: InkWell(
+            //
+            // todo: 页面跳转
+            //
             onTap: onTap ??
                 () {
-                  Navigator.of(context)
-                      .pushNamed(RouteName.articleDetail, arguments: article);
+                  Navigator.of(context).pushNamed(RouteName.articleDetail, arguments: article);
                 },
             child: Container(
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
@@ -57,6 +56,10 @@ class ArticleItemWidget extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
+
+                //
+                //
+                //
                 children: <Widget>[
                   Row(
                     children: <Widget>[
@@ -78,8 +81,7 @@ class ArticleItemWidget extends StatelessWidget {
                       Expanded(
                         child: SizedBox.shrink(),
                       ),
-                      Text(article.niceDate,
-                          style: Theme.of(context).textTheme.caption),
+                      Text(article.niceDate, style: Theme.of(context).textTheme.caption),
                     ],
                   ),
                   if (article.envelopePic.isEmpty)
@@ -124,10 +126,7 @@ class ArticleItemWidget extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.symmetric(vertical: 5),
                         child: Text(
-                          (article.superChapterName != null
-                                  ? article.superChapterName + ' · '
-                                  : '') +
-                              (article.chapterName ?? ''),
+                          (article.superChapterName != null ? article.superChapterName + ' · ' : '') + (article.chapterName ?? ''),
                           style: Theme.of(context).textTheme.overline,
                         ),
                       ),
@@ -149,10 +148,12 @@ class ArticleItemWidget extends StatelessWidget {
                     if (model[article.id] == null) {
                       return child;
                     }
-                    return ArticleFavouriteWidget(
-                        article..collect = model[article.id],
-                        uniqueKey);
+                    return ArticleFavouriteWidget(article..collect = model[article.id], uniqueKey);
                   },
+
+                  //
+                  // todo: 收藏按钮
+                  //
                   child: ArticleFavouriteWidget(article, uniqueKey),
                 ),
         )
@@ -184,14 +185,12 @@ class ArticleFavouriteWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ProviderWidget<FavouriteModel>(
-      model: FavouriteModel(
-          globalFavouriteModel: Provider.of(context, listen: false)),
+      model: FavouriteModel(globalFavouriteModel: Provider.of(context, listen: false)),
       builder: (_, favouriteModel, __) => GestureDetector(
           behavior: HitTestBehavior.opaque, //否则padding的区域点击无效
           onTap: () async {
             if (!favouriteModel.isBusy) {
-              addFavourites(context,
-                  article: article, model: favouriteModel, tag: uniqueKey);
+              addFavourites(context, article: article, model: favouriteModel, tag: uniqueKey);
             }
           },
           child: Padding(
@@ -200,17 +199,11 @@ class ArticleFavouriteWidget extends StatelessWidget {
                 tag: uniqueKey,
                 child: ScaleAnimatedSwitcher(
                     child: favouriteModel.isBusy
-                        ? SizedBox(
-                            height: 24,
-                            width: 24,
-                            child: CupertinoActivityIndicator(radius: 5))
+                        ? SizedBox(height: 24, width: 24, child: CupertinoActivityIndicator(radius: 5))
                         : Consumer<UserModel>(
-                      builder: (context,userModel,child)=>Icon(
-                          userModel.hasUser && article.collect
-                              ? Icons.favorite
-                              : Icons.favorite_border,
-                          color: Colors.redAccent[100]),
-                    )),
+                            builder: (context, userModel, child) =>
+                                Icon(userModel.hasUser && article.collect ? Icons.favorite : Icons.favorite_border, color: Colors.redAccent[100]),
+                          )),
               ))),
     );
   }

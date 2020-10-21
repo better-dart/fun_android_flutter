@@ -15,6 +15,9 @@ class PlatformUtils {
     return PackageInfo.fromPlatform();
   }
 
+  //
+  // todo:
+  //
   static Future<String> getAppVersion() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     return packageInfo.version;

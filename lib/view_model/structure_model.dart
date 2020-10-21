@@ -16,11 +16,18 @@ class StructureListModel extends ViewStateRefreshListModel {
 
   StructureListModel(this.cid);
 
+
+  //
+  // todo: ??? loadData() 接口实现??
+  //
   @override
   Future<List> loadData({int pageNum}) async {
     return await WanAndroidRepository.fetchArticles(pageNum, cid: cid);
   }
 
+  //
+  // todo: ??? loadData() 接口实现??
+  //
   @override
   onCompleted(List data) {
     GlobalFavouriteStateModel.refresh(data);

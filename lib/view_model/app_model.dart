@@ -21,13 +21,25 @@ class AppModel with ChangeNotifier {
 }
 
 class AppUpdateModel extends ViewStateModel {
+
+  //
+  //
+  //
   Future<AppUpdateInfo> checkUpdate() async {
     AppUpdateInfo appUpdateInfo;
+
+    //
+    //
+    //
     setBusy();
     try {
       var appVersion = await PlatformUtils.getAppVersion();
       appUpdateInfo =
           await AppRepository.checkUpdate(Platform.operatingSystem, appVersion);
+
+      //
+      //
+      //
       setIdle();
     } catch (e, s) {
       setError(e,s);

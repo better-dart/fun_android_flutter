@@ -7,25 +7,49 @@ abstract class ViewStateListModel<T> extends ViewStateModel {
 
   /// 第一次进入页面loading skeleton
   initData() async {
+    //
+    //
     setBusy();
+
+    //
+    //
+    //
     await refresh(init: true);
   }
 
   // 下拉刷新
   refresh({bool init = false}) async {
     try {
+      //
+      //
+      //
       List<T> data = await loadData();
+
+      //
       if (data.isEmpty) {
         list.clear();
+
+        //
+        //
+        //
         setEmpty();
       } else {
+        //
+        //
         onCompleted(data);
         list.clear();
         list.addAll(data);
+
+        //
+        //
+        //
         setIdle();
       }
     } catch (e, s) {
       if (init) list.clear();
+
+      //
+      //
       setError(e, s);
     }
   }
