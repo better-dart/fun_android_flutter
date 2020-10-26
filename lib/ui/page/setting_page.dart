@@ -10,11 +10,16 @@ import 'package:provider/provider.dart';
 import 'package:fun_android/view_model/theme_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+///
+///
+///
 class SettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var iconColor = Theme.of(context).accentColor;
     return Scaffold(
+      ///
+      ///
       appBar: AppBar(
         title: Text(S.of(context).setting),
       ),
@@ -28,6 +33,11 @@ class SettingPage extends StatelessWidget {
               ),
               Material(
                 color: Theme.of(context).cardColor,
+
+                ///
+                ///
+                ///
+                ///
                 child: ProviderWidget<UseWebViewPluginModel>(
                   model: UseWebViewPluginModel(),
                   builder: (context, model, child) => ListTile(
@@ -57,9 +67,7 @@ class SettingPage extends StatelessWidget {
                     children: <Widget>[
                       Text(S.of(context).settingFont),
                       Text(
-                        ThemeModel.fontName(
-                            Provider.of<ThemeModel>(context,listen: false).fontIndex,
-                            context),
+                        ThemeModel.fontName(Provider.of<ThemeModel>(context, listen: false).fontIndex, context),
                         style: Theme.of(context).textTheme.caption,
                       )
                     ],
@@ -73,7 +81,7 @@ class SettingPage extends StatelessWidget {
                         shrinkWrap: true,
                         itemCount: ThemeModel.fontValueList.length,
                         itemBuilder: (context, index) {
-                          var model = Provider.of<ThemeModel>(context,listen: false);
+                          var model = Provider.of<ThemeModel>(context, listen: false);
                           return RadioListTile(
                             value: index,
                             onChanged: (index) {
@@ -100,9 +108,7 @@ class SettingPage extends StatelessWidget {
                         style: TextStyle(),
                       ),
                       Text(
-                        LocaleModel.localeName(
-                            Provider.of<LocaleModel>(context).localeIndex,
-                            context),
+                        LocaleModel.localeName(Provider.of<LocaleModel>(context).localeIndex, context),
                         style: Theme.of(context).textTheme.caption,
                       )
                     ],
@@ -137,9 +143,7 @@ class SettingPage extends StatelessWidget {
                 child: ListTile(
                   title: Text(S.of(context).rate),
                   onTap: () async {
-                    LaunchReview.launch(
-                        androidAppId: "cn.phoenixsky.funandroid",
-                        iOSAppId: "1477299503");
+                    LaunchReview.launch(androidAppId: "cn.phoenixsky.funandroid", iOSAppId: "1477299503");
                   },
                   leading: Icon(
                     Icons.star,
@@ -156,16 +160,13 @@ class SettingPage extends StatelessWidget {
                 child: ListTile(
                   title: Text(S.of(context).feedback),
                   onTap: () async {
-                    var url =
-                        'mailto:moran.fc@gmail.com?subject=FunAndroid%20Feedback&body=feedback';
+                    var url = 'mailto:moran.fc@gmail.com?subject=FunAndroid%20Feedback&body=feedback';
                     if (await canLaunch(url)) {
                       await launch(url);
                     } else {
                       showToast(S.of(context).githubIssue);
                       await Future.delayed(Duration(seconds: 1));
-                      launch(
-                          'https://github.com/phoenixsky/fun_android_flutter',
-                          forceSafariVC: false);
+                      launch('https://github.com/phoenixsky/fun_android_flutter', forceSafariVC: false);
                     }
                   },
                   leading: Icon(

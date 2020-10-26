@@ -35,7 +35,16 @@ main() async {
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    ///
+    ///
+    ///
+    ///
     return OKToast(
+
+        ///
+        ///
+        /// todo: 使用 [MultiProvider]
+        ///
         child: MultiProvider(
             //
             // todo: 注意
@@ -49,11 +58,12 @@ class App extends StatelessWidget {
               return RefreshConfiguration(
                 hideFooterWhenNotFull: true, //列表数据不满一页,不触发加载更多
 
-                //
-                //
-                //
+                ///
+                /// todo: app
+                ///
                 child: MaterialApp(
                   debugShowCheckedModeBanner: false,
+                  /// todo: 主题配置
                   theme: themeModel.themeData(),
                   darkTheme: themeModel.themeData(platformDarkMode: true),
                   locale: localeModel.locale,

@@ -78,6 +78,10 @@ class RouterManger {
         return CupertinoPageRoute(builder: (_) => ArticleCategoryTabPage(tree, index));
       case RouteName.favouriteList:
         return CupertinoPageRoute(builder: (_) => FavouriteListPage());
+
+      ///
+      /// setting page:
+      ///
       case RouteName.setting:
         return CupertinoPageRoute(builder: (_) => SettingPage());
       case RouteName.coinRecordList:

@@ -9,9 +9,9 @@ import 'structure_page.dart';
 import 'user_page.dart';
 import 'wechat_account_page.dart';
 
-// todo: tab 页面列表
+/// todo: tab 页面列表
 List<Widget> pages = <Widget>[
-  // 首页
+  /// 首页
   HomePage(),
   // 项目页
   ProjectPage(),
