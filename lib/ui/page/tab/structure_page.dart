@@ -9,13 +9,14 @@ import 'package:fun_android/provider/view_state_widget.dart';
 import 'package:fun_android/view_model/structure_model.dart';
 
 /// 体系
+///
+///
 class StructurePage extends StatefulWidget {
   @override
   _StructurePageState createState() => _StructurePageState();
 }
 
-class _StructurePageState extends State<StructurePage>
-    with AutomaticKeepAliveClientMixin {
+class _StructurePageState extends State<StructurePage> with AutomaticKeepAliveClientMixin {
   List<String> tabs = ['体系', '导航'];
 
   @override
@@ -29,6 +30,10 @@ class _StructurePageState extends State<StructurePage>
       child: Scaffold(
           appBar: AppBar(
               centerTitle: true,
+
+              ///
+              ///
+              ///
               title: TabBar(
                 isScrollable: true,
                 tabs: List.generate(
@@ -37,19 +42,18 @@ class _StructurePageState extends State<StructurePage>
                           text: tabs[index],
                         )),
               )),
-          body: TabBarView(
-              children: [StructureCategoryList(), NavigationSiteCategoryList()])),
+          body: TabBarView(children: [StructureCategoryList(), NavigationSiteCategoryList()])),
     );
   }
 }
+
 /// 体系->体系
 class StructureCategoryList extends StatefulWidget {
   @override
   _StructureCategoryListState createState() => _StructureCategoryListState();
 }
 
-class _StructureCategoryListState extends State<StructureCategoryList>
-    with AutomaticKeepAliveClientMixin {
+class _StructureCategoryListState extends State<StructureCategoryList> with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
@@ -102,8 +106,7 @@ class StructureCategoryWidget extends StatelessWidget {
                   tree.children.length,
                   (index) => ActionChip(
                         onPressed: () {
-                          Navigator.of(context).pushNamed(RouteName.structureList,
-                              arguments: [tree, index]);
+                          Navigator.of(context).pushNamed(RouteName.structureList, arguments: [tree, index]);
                         },
                         label: Text(
                           tree.children[index].name,
@@ -116,16 +119,13 @@ class StructureCategoryWidget extends StatelessWidget {
   }
 }
 
-
 /// 体系->公众号
 class NavigationSiteCategoryList extends StatefulWidget {
   @override
-  _NavigationSiteCategoryListState createState() =>
-      _NavigationSiteCategoryListState();
+  _NavigationSiteCategoryListState createState() => _NavigationSiteCategoryListState();
 }
 
-class _NavigationSiteCategoryListState extends State<NavigationSiteCategoryList>
-    with AutomaticKeepAliveClientMixin {
+class _NavigationSiteCategoryListState extends State<NavigationSiteCategoryList> with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
@@ -178,9 +178,7 @@ class NavigationSiteCategoryWidget extends StatelessWidget {
                   site.articles.length,
                   (index) => ActionChip(
                         onPressed: () {
-                          Navigator.of(context).pushNamed(
-                              RouteName.articleDetail,
-                              arguments: site.articles[index]);
+                          Navigator.of(context).pushNamed(RouteName.articleDetail, arguments: site.articles[index]);
                         },
                         label: Text(
                           site.articles[index].title,

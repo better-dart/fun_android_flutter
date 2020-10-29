@@ -13,13 +13,13 @@ import 'wechat_account_page.dart';
 List<Widget> pages = <Widget>[
   /// 首页
   HomePage(),
-  // 项目页
+  /// 项目页
   ProjectPage(),
-  // 公众号
+  /// 公众号
   WechatAccountPage(),
-  // 体系:
+  /// 体系:
   StructurePage(),
-  // 我的:
+  /// 我的:
   UserPage()
 ];
 

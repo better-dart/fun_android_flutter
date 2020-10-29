@@ -107,6 +107,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
 
                         //
                         //
+                        //////////////////////////////////////////////////////////////
                         //
                         await Navigator.of(context).pushNamed(RouteName.homeSecondFloor);
 
@@ -130,25 +131,67 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
                       },
                       onLoading: homeModel.loadMore,
                       enablePullUp: homeModel.list.isNotEmpty,
+
+
+                      //////////////////////////////////////////////////////////////
+                      ///
+                      ///
+                      ///
+                      ///
+                      ///
                       child: CustomScrollView(
                         controller: tapToTopModel.scrollController,
                         slivers: <Widget>[
+
+                          ///
+                          ///
+                          ///
+                          ///
+                          ///
+                          ///
                           SliverToBoxAdapter(),
+
+                          ////
+
+
+                          ///
+                          ///
+                          ///
+                          ///
+                          ///
                           SliverAppBar(
                             // 加载中并且亮色模式下,状态栏文字为黑色
                             brightness: Theme.of(context).brightness == Brightness.light && homeModel.isBusy ? Brightness.light : Brightness.dark,
+
+                            ///
+                            ///
+                            ///
+                            ///
                             actions: <Widget>[
                               EmptyAnimatedSwitcher(
                                 display: tapToTopModel.showTopBtn,
+                                ///
+                                ///
+                                ///
+                                /// 搜索框:
+                                ///
                                 child: IconButton(
                                   icon: Icon(Icons.search),
                                   onPressed: () {
+                                    ///
+                                    /// 关键参数, 搜索功能
+                                    ///
                                     showSearch(context: context, delegate: DefaultSearchDelegate());
                                   },
                                 ),
                               ),
                             ],
                             flexibleSpace: FlexibleSpaceBar(
+                              ///
+                              ///
+                              ///
+                              ///
+                              ///
                               background: BannerWidget(),
                               centerTitle: true,
                               title: GestureDetector(
@@ -169,11 +212,29 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
                               child: ViewStateEmptyWidget(onPressed: homeModel.initData),
                             )),
                           if (homeModel.topArticles?.isNotEmpty ?? false) HomeTopArticleList(),
+
+                          ///
+                          ///
+                          ///
+                          ///
+                          ///
+                          ///
+                          ///
+                          ///
                           HomeArticleList(),
                         ],
                       )),
                 );
               })),
+
+
+          /////////////////////////////////////////////////////////////////////
+          ///
+          ///
+          /// 浮动搜索框:
+          ///
+          ///
+
           floatingActionButton: ScaleAnimatedSwitcher(
             child: tapToTopModel.showTopBtn && homeModel.refreshController.headerStatus != RefreshStatus.twoLevelOpening
                 ? FloatingActionButton(
@@ -203,6 +264,10 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
   }
 }
 
+
+///
+/// 轮播:
+///
 class BannerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -215,6 +280,13 @@ class BannerWidget extends StatelessWidget {
           return CupertinoActivityIndicator();
         } else {
           var banners = homeModel?.banners ?? [];
+          ///
+          ///
+          ///
+          /// 轮播 导航条:
+          ///
+          ///
+          ///
           return Swiper(
             loop: true,
             autoplay: true,

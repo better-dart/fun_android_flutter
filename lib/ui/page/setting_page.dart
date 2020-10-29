@@ -24,9 +24,13 @@ class SettingPage extends StatelessWidget {
         title: Text(S.of(context).setting),
       ),
       body: SingleChildScrollView(
+        ///
+        ///
+        ///
         child: ListTileTheme(
           contentPadding: const EdgeInsets.symmetric(horizontal: 30),
           child: Column(
+            ///
             children: <Widget>[
               SizedBox(
                 height: 10,
@@ -34,6 +38,7 @@ class SettingPage extends StatelessWidget {
               Material(
                 color: Theme.of(context).cardColor,
 
+                //////////////////////////////////////////////////////////
                 ///
                 ///
                 ///
@@ -59,6 +64,10 @@ class SettingPage extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
+
+              //////////////////////////////////////////////////////////
+              ///  sys font:
+              ///
               Material(
                 color: Theme.of(context).cardColor,
                 child: ExpansionTile(
@@ -97,9 +106,18 @@ class SettingPage extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
+
+              //////////////////////////////////////////////////////////
+              ///
+              /// language select:
+              ///
+              ///
               Material(
                 color: Theme.of(context).cardColor,
                 child: ExpansionTile(
+                  ///
+                  ///
+                  ///
                   title: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
@@ -117,6 +135,11 @@ class SettingPage extends StatelessWidget {
                     Icons.public,
                     color: iconColor,
                   ),
+
+                  ///
+                  ///
+                  ///
+                  ///
                   children: <Widget>[
                     ListView.builder(
                         shrinkWrap: true,
@@ -138,6 +161,9 @@ class SettingPage extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
+
+              /////////////////////////////////////////////////////////////
+
               Material(
                 color: Theme.of(context).cardColor,
                 child: ListTile(
