@@ -11,7 +11,9 @@ import 'package:fun_android/provider/view_state_widget.dart';
 import 'package:fun_android/ui/widget/article_list_Item.dart';
 import 'package:fun_android/view_model/structure_model.dart';
 
+///
 /// 文章列表页面
+///
 class ArticleListPage extends StatefulWidget {
   /// 目录id
   final int cid;
@@ -22,8 +24,7 @@ class ArticleListPage extends StatefulWidget {
   _ArticleListPageState createState() => _ArticleListPageState();
 }
 
-class _ArticleListPageState extends State<ArticleListPage>
-    with AutomaticKeepAliveClientMixin {
+class _ArticleListPageState extends State<ArticleListPage> with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
@@ -31,56 +32,61 @@ class _ArticleListPageState extends State<ArticleListPage>
   Widget build(BuildContext context) {
     super.build(context);
 
-    //
-    //
-    //
     return ProviderWidget<StructureListModel>(
-
-      //
-      //
-      //
+      ///
       model: StructureListModel(widget.cid),
 
-      //
-      //
-      //
+      ///
       onModelReady: (model) => model.initData(),
 
-
-      //
-      //
-      //
+      ///
+      ///
+      ///
       builder: (context, model, child) {
         if (model.isBusy) {
           return SkeletonList(
             builder: (context, index) => ArticleSkeletonItem(),
           );
         } else if (model.isError && model.list.isEmpty) {
-          return ViewStateErrorWidget(
-              error: model.viewStateError, onPressed: model.initData);
+          return ViewStateErrorWidget(error: model.viewStateError, onPressed: model.initData);
         } else if (model.isEmpty) {
           return ViewStateEmptyWidget(onPressed: model.initData);
         }
 
-
-        //
-        //
-        //
+        ///
+        /// todo x: 下拉刷新
+        ///
         return SmartRefresher(
             controller: model.refreshController,
+
+            ///
             header: WaterDropHeader(),
+
+            ///
             footer: RefresherFooter(),
+
+            ///
             onRefresh: model.refresh,
+
+            ///
+            ///
             onLoading: model.loadMore,
             enablePullUp: true,
 
-            //
-            //
-            //
+            ///
+            ///
+            ///
             child: ListView.builder(
                 itemCount: model.list.length,
+
+                ///
+                ///
                 itemBuilder: (context, index) {
                   Article item = model.list[index];
+
+                  ///
+                  ///
+                  ///
                   return ArticleItemWidget(item);
                 }));
       },
@@ -113,8 +119,7 @@ class ArticleCategoryTabPage extends StatelessWidget {
                         ))),
           ),
           body: TabBarView(
-            children: List.generate(tree.children.length,
-                (index) => ArticleListPage(tree.children[index].id)),
+            children: List.generate(tree.children.length, (index) => ArticleListPage(tree.children[index].id)),
           )),
     );
   }

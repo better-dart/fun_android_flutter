@@ -38,7 +38,7 @@ class _UserPageState extends State<UserPage> with AutomaticKeepAliveClientMixin 
           ////////////////////////////////////////////////////////////////////////
           ///
           ///
-          ///
+          /// 顶部头像部分:
           ///
           SliverAppBar(
             actions: <Widget>[

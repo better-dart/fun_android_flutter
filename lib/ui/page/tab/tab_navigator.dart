@@ -9,19 +9,45 @@ import 'structure_page.dart';
 import 'user_page.dart';
 import 'wechat_account_page.dart';
 
+//////////////////////////////////////////////////////////////////////
+///
+///
+/// 底部导航栏列表:
+///
+///
+///
+///
 /// todo: tab 页面列表
 List<Widget> pages = <Widget>[
   /// 首页
   HomePage(),
+
   /// 项目页
   ProjectPage(),
+
   /// 公众号
   WechatAccountPage(),
+
   /// 体系:
+  ///
+  ///
   StructurePage(),
+
   /// 我的:
+  ///
+  ///
   UserPage()
 ];
+
+///
+///
+///
+///
+///
+///
+///
+
+//////////////////////////////////////////////////////////////////////
 
 //
 // todo: bottom nav bar 底部导航栏

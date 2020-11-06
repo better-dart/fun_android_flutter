@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart'
-    hide DropdownButton, DropdownMenuItem, DropdownButtonHideUnderline;
+import 'package:flutter/material.dart' hide DropdownButton, DropdownMenuItem, DropdownButtonHideUnderline;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:fun_android/provider/view_state_list_model.dart';
@@ -15,7 +14,6 @@ import 'package:fun_android/view_model/project_model.dart';
 
 import '../article/article_list_page.dart';
 
-
 //
 //
 //
@@ -24,8 +22,7 @@ class ProjectPage extends StatefulWidget {
   _ProjectPageState createState() => _ProjectPageState();
 }
 
-class _ProjectPageState extends State<ProjectPage>
-    with AutomaticKeepAliveClientMixin {
+class _ProjectPageState extends State<ProjectPage> with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
@@ -49,6 +46,11 @@ class _ProjectPageState extends State<ProjectPage>
     super.build(context);
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: StatusBarUtils.systemUiOverlayStyle(context),
+
+      ///
+      ///
+      ///
+      ///
       child: ProviderWidget<ProjectCategoryModel>(
           model: ProjectCategoryModel(),
           onModelReady: (model) {
@@ -61,6 +63,10 @@ class _ProjectPageState extends State<ProjectPage>
           //
           //
           builder: (context, model, child) {
+            ///
+            ///
+            ///
+            ///
             if (model.isBusy) {
               return ViewStateBusyWidget();
             }
@@ -71,11 +77,18 @@ class _ProjectPageState extends State<ProjectPage>
             List<Tree> treeList = model.list;
             var primaryColor = Theme.of(context).primaryColor;
 
-            //
-            //
-            //
+            ///
+            /// todo x: 关键点:
+            ///
             return ValueListenableProvider<int>.value(
+              ///
+              ///
+              ///
               value: valueNotifier,
+
+              ///
+              ///
+              ///
               child: DefaultTabController(
                 length: model.list.length,
                 initialIndex: valueNotifier.value,
@@ -92,11 +105,13 @@ class _ProjectPageState extends State<ProjectPage>
                       });
                     }
                     return Scaffold(
+                      ///
+                      ///
+                      ///
                       appBar: AppBar(
                         title: Stack(
                           children: [
-                            CategoryDropdownWidget(
-                                Provider.of<ProjectCategoryModel>(context)),
+                            CategoryDropdownWidget(Provider.of<ProjectCategoryModel>(context)),
                             Container(
                               margin: const EdgeInsets.only(right: 25),
                               color: primaryColor.withOpacity(1),
@@ -116,18 +131,21 @@ class _ProjectPageState extends State<ProjectPage>
                         ),
                       ),
 
-
-
                       //////////////////////////////////////////////////////////////////////
 
-
-                      //
-                      //
-                      //
-                      //
+                      ///
+                      ///
+                      /// todo x: tab 页面, 内容列表
+                      ///
                       body: TabBarView(
-                        children: List.generate(treeList.length,
-                            (index) => ArticleListPage(treeList[index].id)),
+                        children: List.generate(
+                          treeList.length,
+
+                          ///
+                          /// todo x: 内容页面
+                          ///
+                          (index) => ArticleListPage(treeList[index].id),
+                        ),
                       ),
                     );
                   },
@@ -165,11 +183,7 @@ class CategoryDropdownWidget extends StatelessWidget {
               child: Text(
                 model.list[index].name,
                 style: currentIndex == index
-                    ? subhead.apply(
-                        fontSizeFactor: 1.15,
-                        color: theme.brightness == Brightness.light
-                            ? Colors.white
-                            : theme.accentColor)
+                    ? subhead.apply(fontSizeFactor: 1.15, color: theme.brightness == Brightness.light ? Colors.white : theme.accentColor)
                     : subhead.apply(color: subhead.color.withAlpha(200)),
               ),
             );

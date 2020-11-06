@@ -15,6 +15,9 @@ import 'image.dart';
 import 'animated_provider.dart';
 import 'article_tag.dart';
 
+///
+///
+///
 class ArticleItemWidget extends StatelessWidget {
   final Article article;
   final int index;
